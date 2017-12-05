@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "get_caption_bot.py", line 29, in <module>
+    caption.encode('cp1252').decode('utf-8')
+  File "C:\Users\cbada\Anaconda3\lib\encodings\cp1252.py", line 12, in encode
+    return codecs.charmap_encode(input,errors,encoding_table)
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 28-29: character maps to <undefined>
