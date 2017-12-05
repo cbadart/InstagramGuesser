@@ -32,9 +32,9 @@
 				console.log(head[1]);
 				line = head[1].split(",");
 				console.log(line);
-				$('#instaimg').src = line[0];
-				$('#instacap').innerHTML = line[1];
-				$('#captionbotcap').innerHTML = line[2];
+				$('#instaimg').attr("src", line[0]);
+				$('#instacap').text(line[1]);
+				$('#captionbotcap').text(line[2]);
 			});
 		</script>
 	</body>
