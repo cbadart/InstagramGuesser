@@ -10,32 +10,84 @@
 			<h1>Instagram Guesser</h1>
 			<br>
 			<div class="row" style="text-align: center;">
-				<div class="col-md-1"><button class="btn btn-link arrow"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button></div>
+				<div class="col-md-1"><button onclick="prevImg()" class="btn btn-link arrow"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button></div>
 				<div class="col-md-10" id="dataArea">
-					<img id="instaimg" src="http://via.placeholder.com/400x400"/>
+					<img id="instaimg" class="1" src="http://via.placeholder.com/400x400"/>
 					<h3 id="instacap">Instagram Caption</h3>
 					<h3 id="captionbotcap">CaptionBot Caption</h3>
 				</div>
-				<div class="col-md-1"><button class="btn btn-link arrow"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button></div>
+				<div class="col-md-1"><button onclick="nextImg()" class="btn btn-link arrow"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button></div>
 			</div>
 		</div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha256-RJDxW82QORKYXHi6Cx1Ku8lPfuwkDIBQaFZ20HGxPXQ=" crossorigin="anonymous"></script>
 		<script>
-			$.get('./data/train.csv', function(data) {
-				var head = data.split("\n");
-				<!-- for(var i=0;i<1;i++){ -->
-					<!-- for(var i=1;i<head.length;i++){ -->
-						
-					<!-- } -->
-				<!-- } -->
-				console.log(head[1]);
-				line = head[1].split(",");
-				console.log(line);
-				$('#instaimg').attr("src", line[0]);
-				$('#instacap').text(line[1]);
-				$('#captionbotcap').text(line[2]);
+			var mydata = new Array;
+			
+			$(document).ready( function () {
+				$.get('./data/train.csv', function(data) {
+					var head = data.split("\n");
+					for(var i = 1; i < head.length; i++){
+						line = head[i].split(",");
+						var obj = {
+							index:i,
+							img:line[0],
+							caption:line[1],
+							desc:line[2]
+						};
+						mydata.push(obj);
+					}
+					//console.log(mydata);
+					continueSetup(mydata);
+				});
+				function continueSetup(data){
+					console.log("got data");
+					console.log(mydata);
+					var ind = $("#instaimg").attr("class");
+					console.log("current index:");
+					console.log(ind);
+					var i = parseInt(ind);
+					display = mydata[i];
+					console.log(display);
+					$("#instaimg").attr("src", display.img);
+					$("#instacap").text(display.caption);
+					$("#captionbotcap").text(display.desc);
+				};
 			});
+			function nextImg(){
+				var ind = $("#instaimg").attr("class");
+				console.log("current index:");
+				console.log(ind);
+				var i = parseInt(ind);
+				if(i == mydata.length - 1){
+					i = 0;
+				} else {
+					i = i + 1;
+				}
+				display = mydata[i];
+				console.log(display);
+				$("#instaimg").attr("src", display.img);
+				$("#instacap").text(display.caption);
+				$("#captionbotcap").text(display.desc);
+				$("#instaimg").attr("class", i);
+			};
+			function prevImg(){
+				var ind = $("#instaimg").attr("class");
+				console.log("current index:");
+				console.log(ind);
+				var i = parseInt(ind);
+				if(i == 0){
+					i = mydata.length-1;
+				} else {
+					i = i - 1;
+				}
+				display = mydata[i];
+				console.log(display);
+				$("#instaimg").attr("src", display.img);
+				$("#instacap").text(display.caption);
+				$("#captionbotcap").text(display.desc);
+				$("#instaimg").attr("class", i);
+			};
 		</script>
 	</body>
 </html>
