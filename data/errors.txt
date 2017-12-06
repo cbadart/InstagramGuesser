@@ -1,6 +1,2 @@
-Traceback (most recent call last):
-  File "get_caption_bot.py", line 29, in <module>
-    caption.encode('cp1252').decode('utf-8')
-  File "C:\Users\cbada\Anaconda3\lib\encodings\cp1252.py", line 12, in encode
-    return codecs.charmap_encode(input,errors,encoding_table)
-UnicodeEncodeError: 'charmap' codec can't encode characters in position 28-29: character maps to <undefined>
+/usr/local/lib/python2.7/dist-packages/emoji/core.py:73: UnicodeWarning: Unicode equal comparison failed to convert both arguments to Unicode - interpreting them as being unequal
+  val = unicode_codes.UNICODE_EMOJI.get(match.group(0), match.group(0))

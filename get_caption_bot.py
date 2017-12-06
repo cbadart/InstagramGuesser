@@ -7,7 +7,7 @@ import emoji
 # create instance of CaptionBot
 c = CaptionBot()
 
-for line in open('all_scrapes.csv', encoding="utf8"):
+for line in open('all_scrapes.csv'):
 	line = line.rstrip()
 	cols = line.split(',')
 	img_url = cols[0]
@@ -26,7 +26,7 @@ for line in open('all_scrapes.csv', encoding="utf8"):
 	if len(caption) < 1: continue
 	# currently emojis look like (apparently called mojibake): ðŸ˜˜
 	# should turn emojis into actual emojis
-	caption.encode('cp1252').decode('utf-8')
+	#caption.encode('cp1252').decode('utf-8')
 	# now try converting emojis to aliases
 	try:
 		caption = emoji.demojize(caption)
